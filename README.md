@@ -108,10 +108,6 @@ Finds a subject in the database.
 ## Contributors
 
 <p align="center">
-  <a href="https://github.com/noamzuck/The-Control-System/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=noamzuck/The-Control-System" />
-  </a>
-  <a href="https://github.com/noamzuck/The-Control-System/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=noamzuck/The-Control-System" />
-  </a>
+  <img src="https://contrib.rocks/image?repo=noamzuck/d-base" />
+  <img src="https://contrib.rocks/image?repo=noamzuck/d-base" />
 </p>
