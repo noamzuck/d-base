@@ -1,3 +1,5 @@
+#Documentation
+
 set a new path for the databases
 -   setPath(path)
     -   path: string | "test"
