@@ -84,14 +84,17 @@ async function updateDatabase({ name, newName, subjects, description }) {
         if(subjects) {
             if(Array.isArray(subjects)) {
                 await Object.keys(json.rows).forEach(async row => {
-                    let i = 0;
-                    await Object.keys(json.rows[row]).forEach(subject => {
+                    await Object.keys(json.rows[row]).forEach((subject, i) => {
                         if(subject != subjects[i]) {
                             if(subjects[i] != undefined) json.rows[row][subjects[i]] = json.rows[row][subject];
                             delete json.rows[row][subject];
                         }
-                        i++;
                     });
+                    if(Object.keys(json.rows[row]).length < subjects.length) {
+                        await subjects.forEach((sub, index) => {
+                            if(index > Object.keys(json.rows[row]).length - 1) json.rows[row][sub] = null;
+                        });
+                    }
                 });
                 json.subjects = subjects;
             } else return "ERROR: There is an error with the subjects you provided.";
