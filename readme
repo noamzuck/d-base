@@ -1,50 +1,50 @@
 set a new path for the databases
--   setPath
+-   setPath(path)
     -   path: string | "test"
 
 create a database
--   create(name, subjects, description)
+-   create({ name, subjects, description })
     -   name: string | "name"
     -   subjects: array | ["subject", "subject"]
     -   description: string | "description"
 
 get: database || row in the database
--   get(name, id, subject)
+-   get({ name, id, subject })
     -   name: string | "name"
     -   id: string | "a1b2c3d4"
     -   subject: string | "subject"
 
 set a row in the database
--   set(name, data)
+-   set({ name, data })
     -   name: string | "name"
     -   data: json | { subject: "content", subject: "content" }
 
 update a row in the database
--   update(name, id, data, subject)
+-   update({ name, id, data, subject })
     -   name: string | "name"
     -   id: string | "a1b2c3d4"
     -   data: allTypes || data: { subject: "content", subject: "content" }
     -   subject: string | "subject"
 
 update database
--   updateDatabase(name, newName, subjects, description)
+-   updateDatabase({ name, newName, subjects, description })
     -   name: string | "name"
     -   newName: string | "newName"
     -   subjects: array | ["subject", "subject"]
     -   description: string | "description"
 
 remove: a row in the database || database
--   delete(name, id)
+-   delete({ name, id })
     -   name: string | "name"
     -   id: string | "a1b2c3d4"
 
 check if: a row in the database || the database exists
--   check(name, id)
+-   check({ name, id })
     -   name: string | "name"
     -   id: string | "a1b2c3d4"
 
 find subject in the database
--   find(name, subject, content)
+-   find({ name, subject, content })
     -   name: string | "name"
     -   subject: string | "subject"
     -   content: allTypes
