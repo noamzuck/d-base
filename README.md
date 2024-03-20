@@ -1,70 +1,79 @@
 ## Documentation
 
-### setPath(path)
+### setPath
+Sets a new path for the databases.
 
--   `path`: string | "test"
+| Parameter | Type       | Example |
+|-----------|------------|---------|
+| `path`    | string | "test"  |
 
-    Sets a new path for the databases.
+### create
+Creates a new database.
 
-### create({ name, subjects, description })
+| Parameter       | Type                     | Example                                |
+|-----------------|--------------------------|----------------------------------------|
+| `name`          | string | "name"                                 |
+| `subjects`      | array | ["subject", "subject"]         |
+| `description`   | string  | "description"                          |
 
--   `name`: string | "name"
--   `subjects`: array | ["subject", "subject"]
--   `description`: string | "description"
+### get
+Gets a database or a row in the database.
 
-    Creates a new database.
+| Parameter  | Type          | Example     |
+|------------|---------------|-------------|
+| `name`     | string | "name"   |
+| `id`       | string | "a1b2c3d4" |
+| `subject`  | string | "subject" |
 
-### get({ name, id, subject })
+### set
+Sets a row in the database.
 
--   `name`: string | "name"
--   `id`: string | "a1b2c3d4"
--   `subject`: string | "subject"
+| Parameter  | Type                  | Example                                      |
+|------------|-----------------------|----------------------------------------------|
+| `name`     | string      | "name"                                       |
+| `data`     | json | { subject: "content", subject: "content" } |
 
-    Gets a database or a row in the database.
+### update
+Updates a row in the database.
 
-### set({ name, data })
+| Parameter  | Type                                                | Example                                      |
+|------------|-----------------------------------------------------|----------------------------------------------|
+| `name`     | string                                    | "name"                                       |
+| `id`       | string                               | "a1b2c3d4"                                   |
+| `data`     | allTypes | { subject: "content", subject: "content" } |
+| `subject`  | string                               | "subject"                                    |
 
--   `name`: string | "name"
--   `data`: json | { subject: "content", subject: "content" }
+### updateDatabase
+Updates a database.
 
-    Sets a row in the database.
+| Parameter    | Type                     | Example                                |
+|--------------|--------------------------|----------------------------------------|
+| `name`       | string | "name"                                 |
+| `newName`    | string    | "newName"                              |
+| `subjects`   | array | ["subject", "subject"]         |
+| `description`| string  | "description"                          |
 
-### update({ name, id, data, subject })
+### delete
+Removes a row in the database or the database itself.
 
--   `name`: string | "name"
--   `id`: string | "a1b2c3d4"
--   `data`: allTypes || { subject: "content", subject: "content" }
--   `subject`: string | "subject"
+| Parameter  | Type          | Example     |
+|------------|---------------|-------------|
+| `name`     | string | "name"   |
+| `id`       | string | "a1b2c3d4" |
 
-    Updates a row in the database.
+### check
+Checks if a row in the database or the database exists.
 
-### updateDatabase({ name, newName, subjects, description })
+| Parameter  | Type          | Example     |
+|------------|---------------|-------------|
+| `name`     | string | "name"   |
+| `id`       | string  | "a1b2c3d4" |
 
--   `name`: string | "name"
--   `newName`: string | "newName"
--   `subjects`: array | ["subject", "subject"]
--   `description`: string | "description"
+### find
+Finds a subject in the database.
 
-    Updates a database.
-
-### delete({ name, id })
-
--   `name`: string | "name"
--   `id`: string | "a1b2c3d4"
-
-    Removes a row in the database or the database itself.
-
-### check({ name, id })
-
--   `name`: string | "name"
--   `id`: string | "a1b2c3d4"
-
-    Checks if a row in the database or the database exists.
-
-### find({ name, subject, content })
-
--   `name`: string | "name"
--   `subject`: string | "subject"
--   `content`: allTypes
-
-    Finds a subject in the database.
+| Parameter  | Type          | Example     |
+|------------|---------------|-------------|
+| `name`     | string | "name"   |
+| `subject`  | string | "subject" |
+| `content`  | allTypes      | any   |
