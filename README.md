@@ -13,10 +13,13 @@ npm install @noamzuck/d-base
 ## Usage
 
 ```javascript
+//import the package as the "dbase" variable
 const dbase = require('@noamzuck/d-base');
 
+//sets the path to the folder "/d-base/"
 dbase.setPath("d-base");
 
+//creates a new database names "first" with the subjects "name", "age" and "city"
 dbase.create({ name: "first", subjects: ["name", "age", "city"], description: "example" });
 ```
 
