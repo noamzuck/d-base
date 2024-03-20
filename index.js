@@ -121,9 +121,33 @@ async function updateDatabase({ name, newName, subjects, description }) {
     })
     .catch(() => { return "ERROR: The database does not exists." });
 }
+
+
+async function remove({ name, id }) {
+    if(!name) return "ERROR: There is a variable missing.";
+    if(id) {
+        return await fs.readFile(name + '.json')
+        .then(res => JSON.parse(res))
+        .then(async json => {
+            if(!json.rows.hasOwnProperty(id)) return "ERROR: The ID does not exist in the database.";
+            delete json.rows[id];
+            return await fs.writeFile(name + ".json", JSON.stringify(json, null, 2))
+            .then(() => { return "The row has been deleted successfully." })
+            .catch(() => { return "ERROR: The database does not exists." });
+        })
+        .catch(() => { return "ERROR: The database does not exists." });
+    } else {
+        try {
+            await fs.unlink(name + '.json');
+            return "The database has been deleted successfully.";
+        } catch(err) {
+            return "ERROR: The database does not exists.";
+        }
+    }
+}
   
 
-module.exports = { create, get, set, update, updateDatabase };
+module.exports = { create, get, set, update, updateDatabase, remove };
 
 function getNewId(ids) {
     const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';

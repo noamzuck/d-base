@@ -29,7 +29,7 @@ update database
     -   subjects: array | ["subject", "subject"]
     -   description: string | "description"
 
-delete: a row in the database || database
+remove: a row in the database || database
 -   delete(name, id)
     -   name: string | "name"
     -   id: integer | 0
