@@ -1,3 +1,5 @@
+<img src="logo.png">
+
 # D-Base
 
 This package helps you manage databases in the most convenient way with the use of functions to create, delete, update, write, search and more.
@@ -102,3 +104,14 @@ Finds a subject in the database.
 | `name`     | string | "name"   |
 | `subject`  | string | "subject" |
 | `content`  | allTypes      | any   |
+
+## Contributors
+
+<p align="center">
+  <a href="https://github.com/noamzuck/The-Control-System/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=noamzuck/The-Control-System" />
+  </a>
+  <a href="https://github.com/noamzuck/The-Control-System/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=noamzuck/The-Control-System" />
+  </a>
+</p>
