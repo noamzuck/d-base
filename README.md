@@ -1,7 +1,5 @@
-<img src="logo.png">
-
 # D-Base
-
+<div align='center'><img src="logo.png"></div>
 This package helps you manage databases in the most convenient way with the use of functions to create, delete, update, write, search and more.
 
 ## Installation
