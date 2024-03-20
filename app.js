@@ -1,5 +1,7 @@
 const db = require("./index.js");
 
+//const dbase = require('@noamzuck/d-base');
+
 async function test() {
     let response;
     //response = await db.create({name: "noam", description: "Hello world", subjects: ["name", "age", "city"]});
@@ -11,7 +13,9 @@ async function test() {
     //response = await db.remove({name: "alon", id: "i5BdWoXsA4AGzXTh8ylH4PEuDApmLyuI"});
     //response = await db.remove({name: "noam"});
     //response = await db.check({name: "alon1", id: "L0wvSbHziiFrR8eXOkT1aDO0r82DNnt3"});
-    //response = await db.find({name: "alon", subject: "name", content: "roii"});
+    response = await db.find({name: "alon", subject: "name", content: "roii"});
+    
+    //response = await dbase.create({name: "noam", subjects: ["name", "age"]});
     console.log(response)
 }
 

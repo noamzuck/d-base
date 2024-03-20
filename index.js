@@ -1,13 +1,14 @@
 const fs = require('fs').promises;
+let path = "d-base/";
 
 async function create({ name, subjects, description }) {
     if(!name || !subjects) return "ERROR: There are some missing variables.";
-    return await fs.stat(name + ".json")
+    return await fs.stat(path + name + ".json")
     .then(() => { return "ERROR: The database already exists." })
     .catch(async error => {
         if(Array.isArray(subjects)) {
             if(!description) description = null;
-            return await fs.writeFile(name + '.json', JSON.stringify( { description: description, subjects: subjects, rows: {} }, null, 2 ))
+            return await fs.writeFile(path + name + '.json', JSON.stringify( { description: description, subjects: subjects, rows: {} }, null, 2 ))
             .then(() => { return "The database was created successfully." })
             .catch(() => { return "ERROR: The database does not exists." });
         } else return "ERROR: There is an error with the subjects you provided.";
@@ -16,7 +17,7 @@ async function create({ name, subjects, description }) {
 
 async function get({ name, id, subject }) {
     if(!name) return "ERROR: There is a missing variable.";
-    return await fs.readFile(name + '.json')
+    return await fs.readFile(path + name + '.json')
     .then(res => JSON.parse(res))
     .then(json => {
         if(id) {
@@ -32,7 +33,7 @@ async function get({ name, id, subject }) {
 
 async function set({ name, data }) {
     if(!name || !data) return "ERROR: There are some missing variables.";
-    return await fs.readFile(name + '.json')
+    return await fs.readFile(path + name + '.json')
     .then(res => JSON.parse(res))
     .then(async json => {
         await json.subjects.forEach(subject => {
@@ -40,7 +41,7 @@ async function set({ name, data }) {
         });
         const id = await getNewId(Object.keys(json.rows));
         json.rows[id] = data;
-        return await fs.writeFile(name + ".json", JSON.stringify(json, null, 2))
+        return await fs.writeFile(path + name + ".json", JSON.stringify(json, null, 2))
         .then(() => { return "The row was added successfully."; })
         .catch(() => { return "ERROR: The database does not exists." });
     })
@@ -49,14 +50,14 @@ async function set({ name, data }) {
 
 async function update({ name, id, data, subject }) {
     if(!name || !id || !data) return "ERROR: There are some missing variables.";
-    return await fs.readFile(name + '.json')
+    return await fs.readFile(path + name + '.json')
     .then(res => JSON.parse(res))
     .then(async json => {
         if(!json.rows.hasOwnProperty(id)) return "ERROR: The ID does not exist in the database.";
         if(subject) {
             if(!json.subjects.includes(subject)) return "ERROR: The subject does not exist in the database.";
             json.rows[id][subject] = data;
-            return await fs.writeFile(name + ".json", JSON.stringify(json, null, 2))
+            return await fs.writeFile(path + name + ".json", JSON.stringify(json, null, 2))
             .then(() => { return "The row has been updated successfully." })
             .catch(() => { return "ERROR: The database does not exists." });
         } else {
@@ -64,7 +65,7 @@ async function update({ name, id, data, subject }) {
                 if(!data.hasOwnProperty(subject)) data[subject] = null;
             });
             json.rows[id] = data;
-            return await fs.writeFile(name + ".json", JSON.stringify(json, null, 2))
+            return await fs.writeFile(path + name + ".json", JSON.stringify(json, null, 2))
             .then(() => { return "The row has been updated successfully." })
             .catch(() => { return "ERROR: The database does not exists." });
         }
@@ -74,7 +75,7 @@ async function update({ name, id, data, subject }) {
 
 async function updateDatabase({ name, newName, subjects, description }) {
     if(!name) return "ERROR: There is a missing variable.";
-    return await fs.readFile(name + ".json")
+    return await fs.readFile(path + name + ".json")
     .then(res => JSON.parse(res))
     .then(async json => {
         if(subjects) {
@@ -99,13 +100,13 @@ async function updateDatabase({ name, newName, subjects, description }) {
 
         let nameStat = "", otherStat = "";
         if(newName) {
-            nameStat = await fs.rename(name + ".json", newName + ".json")
+            nameStat = await fs.rename(path + name + ".json", newName + ".json")
             .then(() => { return "OK"})
             .catch(() => { return "ERROR: The database does not exists.1111111111" });
         }
 
         if(description || subjects) {
-            otherStat = await fs.writeFile(name + ".json", JSON.stringify(json, null, 2))
+            otherStat = await fs.writeFile(path + name + ".json", JSON.stringify(json, null, 2))
             .then(() => { return "OK" })
             .catch(() => { return "ERROR: The database does not exists.2222222222" });
         }
@@ -122,19 +123,19 @@ async function updateDatabase({ name, newName, subjects, description }) {
 async function remove({ name, id }) {
     if(!name) return "ERROR: There is a missing variable.";
     if(id) {
-        return await fs.readFile(name + '.json')
+        return await fs.readFile(path + name + '.json')
         .then(res => JSON.parse(res))
         .then(async json => {
             if(!json.rows.hasOwnProperty(id)) return "ERROR: The ID does not exist in the database.";
             delete json.rows[id];
-            return await fs.writeFile(name + ".json", JSON.stringify(json, null, 2))
+            return await fs.writeFile(path + name + ".json", JSON.stringify(json, null, 2))
             .then(() => { return "The row has been deleted successfully." })
             .catch(() => { return "ERROR: The database does not exists." });
         })
         .catch(() => { return "ERROR: The database does not exists." });
     } else {
         try {
-            await fs.unlink(name + '.json');
+            await fs.unlink(path + name + '.json');
             return "The database has been deleted successfully.";
         } catch(err) {
             return "ERROR: The database does not exists.";
@@ -146,14 +147,14 @@ async function remove({ name, id }) {
 async function check({ name, id }) {
     if(!name) return "ERROR: There is a missing variable.";
     if(id) {
-        return await fs.readFile(name + '.json')
+        return await fs.readFile(path + name + '.json')
         .then(res => JSON.parse(res))
         .then(async json => {
             return json.rows.hasOwnProperty(id);
         })
         .catch(() => { return "ERROR: The database does not exists." });
     } else {
-        return await fs.readFile(name + '.json')
+        return await fs.readFile(path + name + '.json')
         .then(() => { return true })
         .catch(() => { return false });
     }
@@ -161,7 +162,7 @@ async function check({ name, id }) {
 
 async function find({ name, subject, content }) {
     if(!name || !subject, !content) "ERROR: There are some missing variables.";
-    return await fs.readFile(name + '.json')
+    return await fs.readFile(path + name + '.json')
     .then(res => JSON.parse(res))
     .then(res => res.rows)
     .then(async json => {
@@ -175,7 +176,9 @@ async function find({ name, subject, content }) {
     .catch(() => { return "ERROR: The database does not exists. " });
 }
 
-module.exports = { create, get, set, update, updateDatabase, remove, check, find };
+function setPath(getPath) { path = getPath + "/" }
+
+module.exports = { create, get, set, update, updateDatabase, remove, check, find, setPath };
 
 function getNewId(ids) {
     const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';

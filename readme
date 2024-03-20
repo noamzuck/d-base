@@ -1,3 +1,7 @@
+set a new path for the databases
+-   setPath
+    -   path: string | "test"
+
 create a database
 -   create(name, subjects, description)
     -   name: string | "name"
@@ -7,7 +11,7 @@ create a database
 get: database || row in the database
 -   get(name, id, subject)
     -   name: string | "name"
-    -   id: integer | 0
+    -   id: string | "a1b2c3d4"
     -   subject: string | "subject"
 
 set a row in the database
@@ -18,7 +22,7 @@ set a row in the database
 update a row in the database
 -   update(name, id, data, subject)
     -   name: string | "name"
-    -   id: integer | 0
+    -   id: string | "a1b2c3d4"
     -   data: allTypes || data: { subject: "content", subject: "content" }
     -   subject: string | "subject"
 
@@ -32,12 +36,12 @@ update database
 remove: a row in the database || database
 -   delete(name, id)
     -   name: string | "name"
-    -   id: integer | 0
+    -   id: string | "a1b2c3d4"
 
 check if: a row in the database || the database exists
 -   check(name, id)
     -   name: string | "name"
-    -   id: integer | 0
+    -   id: string | "a1b2c3d4"
 
 find subject in the database
 -   find(name, subject, content)

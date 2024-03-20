@@ -1,5 +1,5 @@
 {
-  "name": "d-base",
+  "name": "@noamzuck/d-base",
   "version": "1.0.0",
   "description": "This package helps you manage databases in the most convenient way with the use of functions to create, delete, update, write, search and more.",
   "main": "index.js",
@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/noamzuck/d-base/issues"
   },
-  "homepage": "https://github.com/noamzuck/d-base#readme"
+  "homepage": "https://github.com/noamzuck/d-base#readme",
+  "dependencies": {
+    "@noamzuck/d-base": "^1.0.0"
+  },
+  "devDependencies": {}
 }
