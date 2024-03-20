@@ -1,11 +1,7 @@
-const { error } = require('console');
-
 const fs = require('fs').promises;
 
-//Check if the database exists
-
 async function create({ name, subjects, description }) {
-    if(!name || !subjects) return "ERROR: There are some variables missing.";
+    if(!name || !subjects) return "ERROR: There are some missing variables.";
     return await fs.stat(name + ".json")
     .then(() => { return "ERROR: The database already exists." })
     .catch(async error => {
@@ -19,7 +15,7 @@ async function create({ name, subjects, description }) {
 }
 
 async function get({ name, id, subject }) {
-    if(!name) return "ERROR: There are some variables missing.";
+    if(!name) return "ERROR: There is a missing variable.";
     return await fs.readFile(name + '.json')
     .then(res => JSON.parse(res))
     .then(json => {
@@ -35,7 +31,7 @@ async function get({ name, id, subject }) {
 }
 
 async function set({ name, data }) {
-    if(!name || !data) return "ERROR: There are some variables missing.";
+    if(!name || !data) return "ERROR: There are some missing variables.";
     return await fs.readFile(name + '.json')
     .then(res => JSON.parse(res))
     .then(async json => {
@@ -52,7 +48,7 @@ async function set({ name, data }) {
 }
 
 async function update({ name, id, data, subject }) {
-    if(!name || !id || !data) return "ERROR: There are some variables missing.";
+    if(!name || !id || !data) return "ERROR: There are some missing variables.";
     return await fs.readFile(name + '.json')
     .then(res => JSON.parse(res))
     .then(async json => {
@@ -77,7 +73,7 @@ async function update({ name, id, data, subject }) {
 }
 
 async function updateDatabase({ name, newName, subjects, description }) {
-    if(!name) return "ERROR: There are some variables missing.";
+    if(!name) return "ERROR: There is a missing variable.";
     return await fs.readFile(name + ".json")
     .then(res => JSON.parse(res))
     .then(async json => {
@@ -124,7 +120,7 @@ async function updateDatabase({ name, newName, subjects, description }) {
 
 
 async function remove({ name, id }) {
-    if(!name) return "ERROR: There is a variable missing.";
+    if(!name) return "ERROR: There is a missing variable.";
     if(id) {
         return await fs.readFile(name + '.json')
         .then(res => JSON.parse(res))
@@ -145,9 +141,41 @@ async function remove({ name, id }) {
         }
     }
 }
-  
 
-module.exports = { create, get, set, update, updateDatabase, remove };
+
+async function check({ name, id }) {
+    if(!name) return "ERROR: There is a missing variable.";
+    if(id) {
+        return await fs.readFile(name + '.json')
+        .then(res => JSON.parse(res))
+        .then(async json => {
+            return json.rows.hasOwnProperty(id);
+        })
+        .catch(() => { return "ERROR: The database does not exists." });
+    } else {
+        return await fs.readFile(name + '.json')
+        .then(() => { return true })
+        .catch(() => { return false });
+    }
+}
+
+async function find({ name, subject, content }) {
+    if(!name || !subject, !content) "ERROR: There are some missing variables.";
+    return await fs.readFile(name + '.json')
+    .then(res => JSON.parse(res))
+    .then(res => res.rows)
+    .then(async json => {
+        const response = [];
+        for(let id in json) {
+            if(json[id][subject] == content) response.push(id);
+        }
+        if(response.length == 0) return "There are no results for your request.";
+        return response;
+    })
+    .catch(() => { return "ERROR: The database does not exists. " });
+}
+
+module.exports = { create, get, set, update, updateDatabase, remove, check, find };
 
 function getNewId(ids) {
     const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';

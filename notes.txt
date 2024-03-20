@@ -35,10 +35,9 @@ remove: a row in the database || database
     -   id: integer | 0
 
 check if: a row in the database || the database exists
--   check(name, subject, content)
+-   check(name, id)
     -   name: string | "name"
-    -   subject: string | "subject"
-    -   content: allTypes
+    -   id: integer | 0
 
 find subject in the database
 -   find(name, subject, content)

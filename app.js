@@ -10,6 +10,8 @@ async function test() {
     //response = await db.get({name: "alon"})
     //response = await db.remove({name: "alon", id: "i5BdWoXsA4AGzXTh8ylH4PEuDApmLyuI"});
     //response = await db.remove({name: "noam"});
+    //response = await db.check({name: "alon1", id: "L0wvSbHziiFrR8eXOkT1aDO0r82DNnt3"});
+    //response = await db.find({name: "alon", subject: "name", content: "roii"});
     console.log(response)
 }
 
