@@ -1,0 +1,22 @@
+{
+  "name": "d-base",
+  "version": "1.0.0",
+  "description": "This package helps you manage databases in the most convenient way with the use of functions to create, delete, update, write, search and more.",
+  "main": "index.js",
+  "scripts": {
+    "test": "check({name: 'test'})"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noamzuck/d-base.git"
+  },
+  "keywords": [
+    "database"
+  ],
+  "author": "Noam Zuck",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/noamzuck/d-base/issues"
+  },
+  "homepage": "https://github.com/noamzuck/d-base#readme"
+}
