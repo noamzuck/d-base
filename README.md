@@ -19,7 +19,7 @@ const dbase = require('@noamzuck/d-base');
 //sets the path to the folder "/d-base/"
 dbase.setPath("d-base");
 
-//creates a new database named "first" with the subjects "Name", "Age" and "City"
+//creates a new database named "first" with the subjects "name", "age" and "city"
 dbase.create({ name: "first", subjects: ["name", "age", "city"], description: "example" });
 ```
 
