@@ -1,3 +1,25 @@
+# D-Base
+
+This package helps you manage databases in the most convenient way with the use of functions to create, delete, update, write, search and more.
+
+## Installation
+
+Use the package manager [npm](https://www.npmjs.com/) to install d-base.
+
+```bash
+npm install @noamzuck/d-base
+```
+
+## Usage
+
+```javascript
+const dbase = require('@noamzuck/d-base');
+
+dbase.setPath("d-base");
+
+dbase.create({ name: "first", subjects: ["name", "age", "city"], description: "example" });
+```
+
 ## Documentation
 
 ### setPath
