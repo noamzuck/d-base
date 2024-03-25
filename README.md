@@ -12,6 +12,8 @@ npm install @noamzuck/d-base
 
 ## Usage
 
+### A simple example of how to create a database
+
 ```javascript
 //import the package as the "dbase" variable
 const dbase = require('@noamzuck/d-base');
@@ -20,7 +22,85 @@ const dbase = require('@noamzuck/d-base');
 dbase.setPath("d-base");
 
 //creates a new database named "first" with the subjects "name", "age" and "city"
-dbase.create({ name: "first", subjects: ["name", "age", "city"], description: "example" });
+await dbase.create({ name: "first", subjects: ["name", "age", "city"], description: "example" });
+```
+
+### A more complicated example to use the whole d-base functions
+
+```javascript
+//import the package as the "dbase" variable
+const dbase = require('@noamzuck/d-base');
+
+//creates a custom function to initialize a database
+async function initializeDatabase() {
+    //sets the path to the folder "/d-base/" (this is the default path)
+    console.log(dbase.setPath("d-base"));
+    
+    //checks if the database already exists
+    await dbase.check({name: "first"})
+    .then(async check => {
+        if(!check) {
+            //creates a new database named "first" with the subjects "name", "age" and "city"
+            console.log(await dbase.create({ name: "first", subjects: ["name", "age", "city"], description: "example" }));
+        } else {
+            console.log("The database already exists.");
+        }
+    });
+
+    //sets new rows in the database
+    console.log(await dbase.set({name: "first", data: { name: "Joe", age: 20, city: "Philadelphia"}}));
+    console.log(await dbase.set({name: "first", data: { name: "Josh", age: 25, city: "New York"}}));
+    console.log(await dbase.set({name: "first", data: { name: "Dave", age: 27, city: "Los Angeles"}}));
+
+    //gets the contents of the database named "first"
+    console.log(await dbase.get({name: "first"}));
+
+    //gets a random id of a row from the database
+    const random = await dbase.getARandomRow({name: "first"});
+
+    //gets the contents of the row from the database
+    console.log(await dbase.get({name: "first", id: random}));
+
+    //gets the contents of a specific cell
+    console.log(await dbase.get({name: "first", id: random, subject: "name"}));
+    
+    //updates a specific cell
+    console.log(await dbase.update({name: "first", id: random, data: "Mike", subject: "name" }));
+    
+    //updates a specific row
+    console.log(await dbase.update({name: "first", id: random, data: { name: "Mike", age: 11 } }));
+    
+    //updates a specific database details
+    console.log(await dbase.updateDatabase({name: "first", newName: "third", description: "one two three"}));
+
+    //duplicates a specific database
+    console.log(await dbase.duplicate({name: "first", newName: "second" }));
+
+    //removes a specific database
+    console.log(await dbase.remove({name: "second"}));
+
+    //checks if the row exists
+    console.log(await dbase.check({name: "third", id: random}));
+
+    //removes the previous row
+    console.log(await dbase.remove({name: "third", id: random}));
+    
+    //checks again if the row exists
+    console.log(await dbase.check({name: "third", id: random}));
+
+    //trying to find the string "Jo" in the database under the subject "name" 
+    console.log(await dbase.find({name: "third", subject: "name", content: "Jo", exact: false}));
+
+    //trying to find the exact string "Joe" in the database under the subject "name" 
+    console.log(await dbase.find({name: "third", subject: "name", content: "Joe"}));
+}
+
+//runs the function "initializeDatabase"
+initializeDatabase()
+.then(() => {
+    //put here your code
+})
+.catch(console.error);
 ```
 
 ## Documentation
@@ -41,6 +121,14 @@ The function creates a new database.
 | `subjects`      | array | ["subject", "subject"]         |
 | `description`   | string  | _Optional._ "description"                          |
 
+### set
+The function sets a row in the database.
+
+| Parameter  | Type                  | Example                                      |
+|------------|-----------------------|----------------------------------------------|
+| `name`     | string      | "name"                                       |
+| `data`     | json | { subject: "content", subject: "content" } |
+
 ### get
 The function gets a database or a specific row or cell in the database.
 
@@ -49,14 +137,6 @@ The function gets a database or a specific row or cell in the database.
 | `name`     | string | "name"   |
 | `id`       | string | _Optional._ "a1b2c3d4" |
 | `subject`  | string | _Optional._ "subject" |
-
-### set
-The function sets a row in the database.
-
-| Parameter  | Type                  | Example                                      |
-|------------|-----------------------|----------------------------------------------|
-| `name`     | string      | "name"                                       |
-| `data`     | json | { subject: "content", subject: "content" } |
 
 ### update
 The function updates a specific row or cell in the database.
@@ -78,7 +158,7 @@ The function updates a database.
 | `subjects`   | array | _Optional._ ["subject", "subject"]         |
 | `description`| string  | _Optional._ "description"                          |
 
-### delete
+### remove
 The function removes a specific row or an entire database.
 
 | Parameter  | Type          | Example     |
@@ -103,6 +183,21 @@ The function finds content in the database.
 | `subject`  | string | "subject" |
 | `content`  | allTypes      | any   |
 | `exact`  | bool      | _Optional._ true   |
+
+### duplicate
+The function duplicates an existing database.
+
+| Parameter  | Type          | Example     |
+|------------|---------------|-------------|
+| `name`     | string | "name"   |
+| `newName`       | string  | "newName" |
+
+### getARandomRow
+The function returns an id of a random row from a database.
+
+| Parameter  | Type          | Example     |
+|------------|---------------|-------------|
+| `name`     | string | "name"   |
 
 ## Contributors
 
