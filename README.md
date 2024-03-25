@@ -39,16 +39,16 @@ Creates a new database.
 |-----------------|--------------------------|----------------------------------------|
 | `name`          | string | "name"                                 |
 | `subjects`      | array | ["subject", "subject"]         |
-| `description`   | string  | "description"                          |
+| `description`   | string  | _Optional._ "description"                          |
 
 ### get
-Gets a database or a row in the database.
+Gets a database or a row or a specific cell in the database.
 
 | Parameter  | Type          | Example     |
 |------------|---------------|-------------|
 | `name`     | string | "name"   |
-| `id`       | string | "a1b2c3d4" |
-| `subject`  | string | "subject" |
+| `id`       | string | _Optional._ "a1b2c3d4" |
+| `subject`  | string | _Optional._ "subject" |
 
 ### set
 Sets a row in the database.
@@ -59,14 +59,14 @@ Sets a row in the database.
 | `data`     | json | { subject: "content", subject: "content" } |
 
 ### update
-Updates a row in the database.
+Updates a row or a specific cell in the database.
 
 | Parameter  | Type                                                | Example                                      |
 |------------|-----------------------------------------------------|----------------------------------------------|
 | `name`     | string                                    | "name"                                       |
 | `id`       | string                               | "a1b2c3d4"                                   |
-| `data`     | allTypes | { subject: "content", subject: "content" } |
-| `subject`  | string                               | "subject"                                    |
+| `data`     | json / string | _Optional._ { subject: "content", subject: "content" } / "example" |
+| `subject`  | string                               | _Optional._ "subject"                                    |
 
 ### updateDatabase
 Updates a database.
@@ -74,9 +74,9 @@ Updates a database.
 | Parameter    | Type                     | Example                                |
 |--------------|--------------------------|----------------------------------------|
 | `name`       | string | "name"                                 |
-| `newName`    | string    | "newName"                              |
-| `subjects`   | array | ["subject", "subject"]         |
-| `description`| string  | "description"                          |
+| `newName`    | string    | _Optional._ "newName"                              |
+| `subjects`   | array | _Optional._ ["subject", "subject"]         |
+| `description`| string  | _Optional._ "description"                          |
 
 ### delete
 Removes a row in the database or the database itself.
@@ -84,7 +84,7 @@ Removes a row in the database or the database itself.
 | Parameter  | Type          | Example     |
 |------------|---------------|-------------|
 | `name`     | string | "name"   |
-| `id`       | string | "a1b2c3d4" |
+| `id`       | string | _Optional._ "a1b2c3d4" |
 
 ### check
 Checks if a row in the database or the database exists.
@@ -92,7 +92,7 @@ Checks if a row in the database or the database exists.
 | Parameter  | Type          | Example     |
 |------------|---------------|-------------|
 | `name`     | string | "name"   |
-| `id`       | string  | "a1b2c3d4" |
+| `id`       | string  | _Optional._ "a1b2c3d4" |
 
 ### find
 Finds a subject in the database.
@@ -102,6 +102,7 @@ Finds a subject in the database.
 | `name`     | string | "name"   |
 | `subject`  | string | "subject" |
 | `content`  | allTypes      | any   |
+| `exact`  | bool      | _Optional._ true   |
 
 ## Contributors
 
