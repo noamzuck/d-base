@@ -26,14 +26,14 @@ dbase.create({ name: "first", subjects: ["name", "age", "city"], description: "e
 ## Documentation
 
 ### setPath
-Sets a new path for the databases.
+The function defines a new path to the directory's databases (default: /d-base/).
 
 | Parameter | Type       | Example |
 |-----------|------------|---------|
 | `path`    | string | "test"  |
 
 ### create
-Creates a new database.
+The function creates a new database.
 
 | Parameter       | Type                     | Example                                |
 |-----------------|--------------------------|----------------------------------------|
@@ -42,7 +42,7 @@ Creates a new database.
 | `description`   | string  | _Optional._ "description"                          |
 
 ### get
-Gets a database or a row or a specific cell in the database.
+The function gets a database or a specific row or cell in the database.
 
 | Parameter  | Type          | Example     |
 |------------|---------------|-------------|
@@ -51,7 +51,7 @@ Gets a database or a row or a specific cell in the database.
 | `subject`  | string | _Optional._ "subject" |
 
 ### set
-Sets a row in the database.
+The function sets a row in the database.
 
 | Parameter  | Type                  | Example                                      |
 |------------|-----------------------|----------------------------------------------|
@@ -59,7 +59,7 @@ Sets a row in the database.
 | `data`     | json | { subject: "content", subject: "content" } |
 
 ### update
-Updates a row or a specific cell in the database.
+The function updates a specific row or cell in the database.
 
 | Parameter  | Type                                                | Example                                      |
 |------------|-----------------------------------------------------|----------------------------------------------|
@@ -69,7 +69,7 @@ Updates a row or a specific cell in the database.
 | `subject`  | string                               | _Optional._ "subject"                                    |
 
 ### updateDatabase
-Updates a database.
+The function updates a database.
 
 | Parameter    | Type                     | Example                                |
 |--------------|--------------------------|----------------------------------------|
@@ -79,7 +79,7 @@ Updates a database.
 | `description`| string  | _Optional._ "description"                          |
 
 ### delete
-Removes a row in the database or the database itself.
+The function removes a specific row or an entire database.
 
 | Parameter  | Type          | Example     |
 |------------|---------------|-------------|
@@ -87,7 +87,7 @@ Removes a row in the database or the database itself.
 | `id`       | string | _Optional._ "a1b2c3d4" |
 
 ### check
-Checks if a row in the database or the database exists.
+The function checks if a specific row or database exists.
 
 | Parameter  | Type          | Example     |
 |------------|---------------|-------------|
@@ -95,7 +95,7 @@ Checks if a row in the database or the database exists.
 | `id`       | string  | _Optional._ "a1b2c3d4" |
 
 ### find
-Finds a subject in the database.
+The function finds content in the database.
 
 | Parameter  | Type          | Example     |
 |------------|---------------|-------------|
